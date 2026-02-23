@@ -39,3 +39,42 @@ model Courses{
   studentId student? @relation(fields: [courseId], references: [id])
 }
 
+//  Mandatory : every course created must have a 
+// model student{
+//   id Int @id @default(autoincrement())
+//   courses Courses[]
+// }
+
+// model Courses{
+//   id Int @id @default(autoincrement())
+//   courseName String 
+//   courseId Int
+//   studentId student @relation(fields: [courseId], references: [id])
+// }
+
+
+
+// Many to Many Relationship
+// Explicit declaration
+
+model Employee{
+  id Int @id @default(autoincrement())
+  employeename String @map("Name")
+  jobtitle Employedwithtitle[]
+}
+
+model Jobtitle{
+  id Int @id @default(autoincrement())
+  jobtitle String @map("title")
+  employee Employedwithtitle[]
+}
+
+model Employedwithtitle{
+  id Int @default(autoincrement())
+  employee Employee @relation(fields: [eId] , references: [id])
+  jobtitle Jobtitle @relation(fields: [jId] , references: [id])
+  eId Int
+  jId Int
+  created DateTime @default(now())
+  @@id([eId, jId])
+}

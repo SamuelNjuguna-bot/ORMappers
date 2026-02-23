@@ -79,6 +79,26 @@ app.post("/createonetomany",async(req, res)=>{
 
 
 })
+
+
+app.post("/manytomany", async(req,res)=>{
+  const manytomany = await prisma.employee.create({
+    data:{
+      employeename:"Alice Smith",
+      jobtitle:{
+        create:{
+          jobtitle:{
+            create:{
+              jobtitle:"Software Dev"
+            }
+          }
+          
+        }
+      }
+    }
+
+  })
+})
 app.listen(port, ()=>{
   console.log("server running on port 3000")
 })
