@@ -1,0 +1,27 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model user{
+  id Int @id @default(autoincrement())
+  firstName String @default("John Doe")
+  profile Profile?
+}
+
+model Profile{
+  id Int @id @default(autoincrement())
+  owner  user @relation(fields: [ownerId], references: [id])
+  ownerId Int @unique
+  username String
+  phoneNumber BigInt
+}
+
+
+
