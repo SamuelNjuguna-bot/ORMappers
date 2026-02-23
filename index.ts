@@ -60,6 +60,25 @@ app.patch("/updateuser", async(req,res)=>{
   console.log(user)
 })
 
+
+// Creating a one to many relationship
+app.post("/createonetomany",async(req, res)=>{
+
+  const student = await prisma.student.create({
+
+    data:{
+      courses:{
+        create:{
+          courseName:"Design And Analysis Of Algorithms"
+        }
+      }
+    }
+  })
+
+  console.log(student)
+
+
+})
 app.listen(port, ()=>{
   console.log("server running on port 3000")
 })
